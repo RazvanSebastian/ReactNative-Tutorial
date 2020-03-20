@@ -1,21 +1,28 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Platform } from "react-native";
 
-const CategoriesScreen = porps => {
+import { CATEGORIES } from "../dummy/dummy-data";
+import { FlatList } from "react-native-gesture-handler";
+import CategoryGridTitle from "../components/CategoryGridTitle";
+
+const renderGridItem = (item, navigation) => {
+  return <CategoryGridTitle item={item} navigation={navigation} />;
+};
+
+const CategoriesScreen = props => {
   return (
-    <View style={styles.container}>
-      <Text>CategoriesScreen</Text>
-    </View>
+    <FlatList
+      data={CATEGORIES}
+      renderItem={({ item }) => renderGridItem(item, props.navigation)}
+      numColumns={2}
+    />
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+CategoriesScreen.navigationOptions = {
+  headerTitle: "Meal Categories"
+};
+
+const styles = StyleSheet.create({});
 
 export default CategoriesScreen;

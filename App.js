@@ -2,6 +2,16 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
+import { enableScreens } from "react-native-screens";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import MealsNavigator from "./navigator/MealsNavigator";
+
+/* 
+By using this feature improve the navigator performance 
+by allowing under the hood to use Android Fragment   and IOS view controller
+*/
+enableScreens();
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -16,25 +26,12 @@ export default function App() {
   if (!fontLoaded) {
     return (
       <AppLoading
-        startAsync= {fetchFonts}
+        startAsync={fetchFonts}
         onFinish={() => setFontLoaded(true)}
         onError={console.warn}
       />
     );
   }
 
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+  return <MealsNavigator />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});

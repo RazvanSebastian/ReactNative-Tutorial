@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const FilterMealsScreen = porps => {
+const FilterMealsScreen = props => {
   return (
     <View style={styles.container}>
       <Text>FilterMealsScreen</Text>

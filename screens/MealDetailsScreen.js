@@ -1,12 +1,42 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-const MealDetailsScreen = porps => {
+import { MEALS } from "../dummy/dummy-data";
+import FavouriteHeaderButton from "../components/HeaderButton";
+
+const MealDetailsScreen = props => {
+  const selectedMeal = MEALS.find(
+    meal => meal.id === props.navigation.getParam("mealId")
+  );
+
   return (
     <View style={styles.container}>
-      <Text>MealDetailsScreen</Text>
+      <Text> {selectedMeal.title}</Text>
+      <Button
+        title="Go back to categories"
+        onPress={() => props.navigation.navigate("Categories")}
+      />
     </View>
   );
+};
+
+MealDetailsScreen.navigationOptions = navigationData => {
+  const selectedMeal = MEALS.find(
+    meal => meal.id === navigationData.navigation.getParam("mealId")
+  );
+  return {
+    headerTitle: selectedMeal.title,
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={FavouriteHeaderButton}>
+        <Item
+          title="Favourite"
+          iconName="ios-heart"
+          onPress={() => console.log("Mark as favourite!")}
+        />
+      </HeaderButtons>
+    )
+  };
 };
 
 const styles = StyleSheet.create({
