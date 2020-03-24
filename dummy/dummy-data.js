@@ -74,7 +74,7 @@ export const MEALS = [
 
   new Meal(
     "m3",
-    ["c3"],
+    ["c2", "c3"],
     "Classic Hamburger",
     "pricey",
     "simple",
@@ -103,7 +103,7 @@ export const MEALS = [
 
   new Meal(
     "m4",
-    ["c4"],
+    ["c2", "c4"],
     "Wiener Schnitzel",
     "luxurious",
     "challenging",

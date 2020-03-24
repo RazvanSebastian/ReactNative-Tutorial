@@ -12,8 +12,17 @@ import CategoriesScreen from "../screens/CategoriesScreen";
 import CategoryMealsScreen from "../screens/CategoryMealsScreen";
 import MealDetailsScreen from "../screens/MealDetailsScreen";
 import FavouritesScreen from "../screens/FavouritesScreen";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import FilterMealsScreen from "../screens/FilterMealsScreen";
 
-const MealsNavigator = createStackNavigator(
+const customNvigationOptions = {
+  headerStyle: {
+    backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
+  },
+  headerTintColor: Platform.OS === "android" ? "white" : "black"
+};
+
+const MealsStackNavigator = createStackNavigator(
   {
     Categories: {
       screen: CategoriesScreen
@@ -26,19 +35,24 @@ const MealsNavigator = createStackNavigator(
     }
   },
   {
-    // initialRouteName: 'MealDetails',
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
-      },
-      headerTintColor: Platform.OS === "android" ? "white" : "black"
+    defaultNavigationOptions: customNvigationOptions
+  }
+);
+
+const FilterStackNavigator = createStackNavigator(
+  {
+    Filters: {
+      screen: FilterMealsScreen
     }
+  },
+  {
+    defaultNavigationOptions: customNvigationOptions
   }
 );
 
 const tabScreenConfig = {
   Meals: {
-    screen: MealsNavigator,
+    screen: MealsStackNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return (
@@ -72,4 +86,31 @@ const MealsFavTabNavigator =
         }
       });
 
-export default createAppContainer(MealsFavTabNavigator);
+const MainNavigator = createDrawerNavigator(
+  {
+    Meals: {
+      screen: MealsFavTabNavigator,
+      navigationOptions: {
+        drawerLabel: "Meals",
+        drawerIcon: <Ionicons name="ios-restaurant" size={20} />
+      }
+    },
+    Filter: {
+      screen: FilterStackNavigator,
+      navigationOptions: {
+        drawerLabel: "Filter",
+        drawerIcon: <Ionicons name="ios-search" size={20} />
+      }
+    }
+  },
+  {
+    contentOptions: {
+      activeTintColor: Colors.accentColor,
+      labelStyle:{
+        fontFamily: "open-sans-bold"
+      }
+    }
+  }
+);
+
+export default createAppContainer(MainNavigator);

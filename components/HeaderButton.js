@@ -4,15 +4,14 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
 
-const FavouriteHeaderButton = props => {
+const ApplicationHeaderButton = props => {
   return (
     <HeaderButton
       {...props}
       IconComponent={Ionicons}
       iconSize={23}
-      color={Colors.secondaryColor}
     />
   );
 };
 
-export default FavouriteHeaderButton;
+export default ApplicationHeaderButton;

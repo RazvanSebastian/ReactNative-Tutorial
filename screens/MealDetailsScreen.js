@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { MEALS } from "../dummy/dummy-data";
-import FavouriteHeaderButton from "../components/HeaderButton";
+import ApplicationHeaderButton from "../components/HeaderButton";
+import Colors from "../constants/Colors";
 
 const MealDetailsScreen = props => {
   const selectedMeal = MEALS.find(
@@ -28,11 +29,12 @@ MealDetailsScreen.navigationOptions = navigationData => {
   return {
     headerTitle: selectedMeal.title,
     headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={FavouriteHeaderButton}>
+      <HeaderButtons HeaderButtonComponent={ApplicationHeaderButton}>
         <Item
           title="Favourite"
           iconName="ios-heart"
           onPress={() => console.log("Mark as favourite!")}
+          color={Colors.secondaryColor}
         />
       </HeaderButtons>
     )
